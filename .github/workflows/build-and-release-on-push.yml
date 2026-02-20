@@ -1,0 +1,102 @@
+name: Build and Release on Push
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  DOTNET_VERSION: '3.1.x'
+  PROJECT_PATH: 'ComputerHardwareInfo/ComputerHardwareInfo.csproj'
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Restore NuGet packages
+      run: nuget restore "${{ env.PROJECT_PATH }}"
+
+    - name: Build Release
+      run: msbuild "${{ env.PROJECT_PATH }}" /p:Configuration=Release /p:Platform="Any CPU"
+
+    - name: Generate Version
+      id: version
+      shell: powershell
+      run: |
+        $buildNumber = $env:GITHUB_RUN_NUMBER
+        $date = Get-Date -Format 'yyyyMMdd'
+        $commitHash = "${{ github.sha }}".Substring(0, 7)
+        $version = "1.0.0-build.$buildNumber.$date"
+        $tagName = "v1.0.0-build.$buildNumber"
+        echo "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+        echo "tag=$tagName" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+    - name: Create Release Directory
+      shell: powershell
+      run: |
+        New-Item -ItemType Directory -Path release_output -Force
+        Copy-Item "ComputerHardwareInfo\bin\Release\HardwareCollector.exe" release_output\
+        Copy-Item "ComputerHardwareInfo\bin\Release\*.dll" release_output\ -ErrorAction SilentlyContinue
+
+    - name: Create ZIP Archive
+      shell: powershell
+      run: |
+        Compress-Archive -Path release_output\* -DestinationPath "HardwareCollector-${{ steps.version.outputs.version }}.zip" -Force
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          HardwareCollector-${{ steps.version.outputs.version }}.zip
+          release_output/HardwareCollector.exe
+        tag_name: ${{ steps.version.outputs.tag }}
+        name: HardwareCollector ${{ steps.version.outputs.version }}
+        body: |
+          ## HardwareCollector Release ${{ steps.version.outputs.version }}
+          
+          Automated release from commit: ${{ github.sha }}
+          
+          ### What's included:
+          - HardwareCollector.exe - Main application executable
+          - HardwareCollector-${{ steps.version.outputs.version }}.zip - Complete package
+          - All required dependencies
+          
+          ### System Requirements:
+          - Windows OS (7 or later)
+          - .NET Framework 4.0 or higher
+          
+          ### Quick Start:
+          ```bash
+          # Single computer
+          HardwareCollector.exe DESKTOP-01
+          
+          # Multiple computers
+          HardwareCollector.exe server01 server02
+          
+          # Comma-separated
+          HardwareCollector.exe "server01,server02,server03"
+          
+          # Help
+          HardwareCollector.exe /?
+          
+          # Interactive mode
+          HardwareCollector.exe
+          ```
+          
+          ### Output:
+          Hardware information is saved to: `%USERPROFILE%\Desktop\pc_hardware_info_[COMPUTER_NAME].txt`
+          
+          For more details and documentation, visit the [repository](https://github.com/${{ github.repository }})
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
