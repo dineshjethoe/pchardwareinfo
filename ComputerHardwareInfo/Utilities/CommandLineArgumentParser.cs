@@ -184,7 +184,7 @@ namespace ComputerHardwareInfo.Utilities
             Console.WriteLine();
             Console.WriteLine("OUTPUT:");
             Console.WriteLine("  Hardware information is saved to:");
-            Console.WriteLine("  %USERPROFILE%\\Desktop\\pc_hardware_info_[COMPUTER_NAME].txt");
+            Console.WriteLine("  Application Directory\\pc_hardware_info_[COMPUTER_NAME].txt");
             Console.WriteLine();
             Console.WriteLine("INTERACTIVE MODE:");
             Console.WriteLine("  If no computer names are provided, you will be prompted to enter them.");
@@ -270,7 +270,10 @@ namespace ComputerHardwareInfo.Utilities
 
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Report files have been saved to your Desktop:");
+            Console.WriteLine("Report files have been saved to the application directory:");
+            Console.WriteLine($"  {AppDomain.CurrentDomain.BaseDirectory}");
+            Console.WriteLine();
+            Console.WriteLine("Files created:");
             foreach (var computerName in computerNames)
                 Console.WriteLine($"  | pc_hardware_info_{computerName}.txt");
             Console.ResetColor();

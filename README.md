@@ -19,7 +19,7 @@ Back in 2019, I needed to collect detailed hardware information from multiple re
 GetHardwareInfo.exe COMPUTER1 COMPUTER2 COMPUTER3
 ```
 
-Reports are automatically saved to your Desktop.
+Reports are automatically saved to the app folder.
 
 ## What it collects
 
@@ -58,7 +58,7 @@ The app will prompt for credentials if needed. Results include a summary table s
 
 ## Notes
 
-- All reports saved to Desktop in text format
+- All reports saved to the app folder in text format
 - Handles authentication for secured networks
 - Graceful error handling and continues processing even if one computer fails
 - Each report includes computer name and timestamp

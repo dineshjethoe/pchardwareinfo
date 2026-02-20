@@ -32,9 +32,9 @@ namespace ComputerHardwareInfo
                     {
                         var hardwareInfoCollector = new ComputerInfo(computerName, OutputType.File);
                         hardwareInfoCollector.Execute();
-                        resultsTable.AddRow(computerName, "√ Success", "Data saved to Desktop");
+                        resultsTable.AddRow(computerName, "√ Success", "Data saved to application directory");
                         successfulCollections++;
-                        argumentParser.DisplayProcessingCompleted(computerName, true, "Data saved to Desktop");
+                        argumentParser.DisplayProcessingCompleted(computerName, true, "Data saved to application directory");
                     }
                     catch (Exception ex)
                     {

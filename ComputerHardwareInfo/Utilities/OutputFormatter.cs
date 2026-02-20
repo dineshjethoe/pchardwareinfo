@@ -14,10 +14,13 @@ namespace ComputerHardwareInfo.Utilities
         {
             this.outputDestination = outputDestination;
             this.reportContent = new StringBuilder();
+            string outputDirectory = AppDomain.CurrentDomain.BaseDirectory;
             this.outputFilePath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
+                outputDirectory,
                 $"pc_hardware_info_{targetComputerName}.txt");
         }
+
+        public string GetOutputFilePath() => outputFilePath;
 
         public void AppendSectionHeader(string sectionTitle)
         {
@@ -36,7 +39,10 @@ namespace ComputerHardwareInfo.Utilities
         {
             Console.WriteLine(reportContent.ToString());
             if (outputDestination == OutputType.File)
+            {
                 WriteReportToFile(reportContent.ToString());
+                Console.WriteLine($"[Report saved to: {outputFilePath}]");
+            }
         }
 
         private void WriteReportToFile(string reportText)
