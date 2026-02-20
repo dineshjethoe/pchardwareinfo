@@ -2,7 +2,7 @@
 
 > Automate remote hardware information collection from multiple Windows computers.
 
-## Why I Created It
+## Purpose
 
 Back in 2019, I needed to collect detailed hardware information from multiple remote computers for a project. Instead of logging into each machine individually, I automated the process using WMI to gather comprehensive system specs in one go.
 
@@ -21,7 +21,7 @@ GetHardwareInfo.exe COMPUTER1 COMPUTER2 COMPUTER3
 
 Reports are automatically saved to your Desktop.
 
-## What It Collects
+## What it collects
 
 - **OS**: Computer name, OS version, serial number, timezone
 - **Hardware**: CPU (cores, speed, model), RAM, storage (size, free space)
