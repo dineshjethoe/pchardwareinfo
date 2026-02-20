@@ -42,10 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collectors\RemoteComputerHardwareCollector.cs" />
     <Compile Include="ComputerInfo.cs" />
+    <Compile Include="Models\Credentials.cs" />
     <Compile Include="OutputType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\CommandLineArgumentParser.cs" />
+    <Compile Include="Utilities\ConsoleTableFormatter.cs" />
+    <Compile Include="Utilities\ManagementExtensions.cs" />
+    <Compile Include="Utilities\OutputFormatter.cs" />
+    <Compile Include="Utilities\SizeFormatter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="example_usage.bat" />
+    <None Include="example_usage.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
