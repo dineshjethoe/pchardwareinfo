@@ -2,7 +2,7 @@
 # Computer Hardware Information Collector - PowerShell Example
 # ============================================================================
 # This PowerShell script demonstrates various ways to use the
-# ComputerHardwareInfo.exe application.
+# GetRPCHWInfo.exe application.
 #
 # USAGE:
 # 1. Right-click PowerShell and select "Run as Administrator"
@@ -36,15 +36,15 @@ function Write-Info {
 
 # Get the directory where the script is located
 $ScriptDirectory = Split-Path -Parent $MyInvocation.MyCommand.Path
-$AppPath = Join-Path $ScriptDirectory "ComputerHardwareInfo.exe"
+$AppPath = Join-Path $ScriptDirectory "GetRPCHWInfo.exe"
 
 # Function to check if app exists
 function Test-AppExists {
     if (Test-Path $AppPath) {
-        Write-Success "Found ComputerHardwareInfo.exe"
+        Write-Success "Found GetRPCHWInfo.exe"
         return $true
     } else {
-        Write-Error-Custom "ComputerHardwareInfo.exe not found at: $AppPath"
+        Write-Error-Custom "GetRPCHWInfo.exe not found at: $AppPath"
         Write-Info "Please ensure this script is in the same folder as the executable"
         return $false
     }

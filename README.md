@@ -16,7 +16,7 @@ Back in 2019, I needed to collect detailed hardware information from multiple re
 ## Quick Start
 
 ```bash
-GetHardwareInfo.exe COMPUTER1 COMPUTER2 COMPUTER3
+GetRPCHWInfo.exe COMPUTER1 COMPUTER2 COMPUTER3
 ```
 
 Reports are automatically saved to the app folder.
@@ -33,17 +33,17 @@ Reports are automatically saved to the app folder.
 
 ### Single Computer
 ```bash
-GetHardwareInfo.exe WORKSTATION-01
+GetRPCHWInfo.exe WORKSTATION-01
 ```
 
 ### Multiple Computers
 ```bash
-GetHardwareInfo.exe WORKSTATION-01 WORKSTATION-02 WORKSTATION-03
+GetRPCHWInfo.exe WORKSTATION-01 WORKSTATION-02 WORKSTATION-03
 ```
 
 ### With Domain
 ```bash
-GetHardwareInfo.exe DOMAIN\COMPUTERNAME
+GetRPCHWInfo.exe DOMAIN\COMPUTERNAME
 ```
 
 The app will prompt for credentials if needed. Results include a summary table showing success/failure for each computer.

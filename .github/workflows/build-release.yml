@@ -7,7 +7,7 @@ on:
 
 env:
   PROJECT_PATH: 'ComputerHardwareInfo/ComputerHardwareInfo.csproj'
-  OUTPUT_NAME: 'HardwareCollector'
+  OUTPUT_NAME: 'GetRPCHWInfo'
 
 jobs:
   build:

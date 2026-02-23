@@ -2,17 +2,17 @@
 REM ============================================================================
 REM Computer Hardware Information Collector - Example Usage
 REM ============================================================================
-REM This batch file demonstrates how to use the ComputerHardwareInfo.exe
+REM This batch file demonstrates how to use the GetRPCHWInfo.exe
 REM application with various scenarios.
 REM
-REM USAGE: Copy this file to the same folder as ComputerHardwareInfo.exe
+REM USAGE: Copy this file to the same folder as GetRPCHWInfo.exe
 REM        or adjust the path to match your installation.
 REM ============================================================================
 
 setlocal enabledelayedexpansion
 
 REM Set the path to the executable (adjust if needed)
-set "APP_PATH=ComputerHardwareInfo.exe"
+set "APP_PATH=GetRPCHWInfo.exe"
 
 REM Color codes for output
 set "COLOR_INFO=0A"
@@ -29,8 +29,8 @@ echo.
 REM Check if the application exists
 if not exist "%APP_PATH%" (
     color %COLOR_ERROR%
-    echo ERROR: ComputerHardwareInfo.exe not found!
-    echo Please copy this script to the same folder as ComputerHardwareInfo.exe
+    echo ERROR: GetRPCHWInfo.exe not found!
+    echo Please copy this script to the same folder as GetRPCHWInfo.exe
     echo.
     pause
     exit /b 1
